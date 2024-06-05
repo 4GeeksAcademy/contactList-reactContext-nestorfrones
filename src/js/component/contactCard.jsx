@@ -14,27 +14,23 @@ export const Contact = () => {
 		setId(element)
 	}
 
-	function refreshContactList(){
-		actions.getContacts();
-	}
-
 	function confirmDelete() {
 		actions.deleteContact(id);
-		refreshContactList();
 	}
 
-
+	function idUpdateContact(element){
+		actions.setIdForUpdate(element)
+	}
 
 
 	let urlImage1 = "https://picsum.photos/id/"
 	let urlImage2 = "/200/200"
 
 
-
-
-
 	return (
+
 		<div>
+			{store.Contacts.length === 0 && <span>No hay contactos agregados</span>}
 			{store.Contacts.map((contact) => {
 				return (
 					<div key={contact.id} className="row border rounded m-2">
@@ -61,7 +57,7 @@ export const Contact = () => {
 						</div>
 						<div className="col-2 p-2 ms-auto me-2 d-flex d-inline">
 							<div className="d-flex align-items-start mt-3">
-								<Link to="/addContact"><button className="btn"><FontAwesomeIcon className="px-2" icon={faPencil} /></button></Link>
+								<Link to="/updateContact"><button onClick={()=> idUpdateContact(contact.id)} className="btn"><FontAwesomeIcon className="px-2" icon={faPencil} /></button></Link>
 							</div>
 							<div className="d-flex align-items-start mt-3">
 								<button onClick={() => deleteOneContact(contact.id)} className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" ><FontAwesomeIcon className="px-2" icon={faTrash} /></button>
@@ -84,7 +80,7 @@ export const Contact = () => {
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Oh no!</button>
-							<button  onClick={() => confirmDelete()} type="button" className="btn btn-primary" data-bs-dismiss="modal">Yes Baby!</button>
+							<button onClick={() => confirmDelete()} type="button" className="btn btn-primary" data-bs-dismiss="modal">Yes Baby!</button>
 						</div>
 					</div>
 				</div>

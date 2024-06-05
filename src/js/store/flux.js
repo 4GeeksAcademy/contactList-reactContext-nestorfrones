@@ -10,6 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				address: ""
 			},
 
+			id: ""
+
 
 		},
 		actions: {
@@ -31,6 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			postContact: async (inputName, inputPhone, inputEmail, inputAddress) => {
+				let actions = getActions();
 				const response = await fetch("https://playground.4geeks.com/contact/agendas/nestorfrones/contacts", {
 					method: "POST",
 					body: JSON.stringify({
@@ -45,38 +48,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				if (response.ok) {
 					alert("contacto creado correctamente")
+					actions.getContacts();
 				}else {
 					alert("no se puede crear");
 				}
 
 			},
 
-			// putContact: async (inputName, inputPhone, inputEmail, inputAddress) => {
-			// 	const response = await fetch('https://playground.4geeks.com/contact/agendas/nestorfrones/contacts/' + `${store.id}`, {
-			// 		method: "PUT",
-			// 		body: JSON.stringify({
-			// 			name: inputName,
-			// 			phone: inputPhone,
-			// 			email: inputEmail,
-			// 			address: inputAddress
-			// 		}),
-			// 		headers: {
-			// 			'Content-Type': 'application/json'
-			// 		}
-			// 	})
-			// 	if (response.ok) {
-			// 		alert("contacto actualizado correctamente")
-			// 	}else {
-			// 		alert("no se puede actualizar");
-			// 	}
-			// },
+			setIdForUpdate: async (newId)=>{
+				setStore({
+					id: newId
+				})
+			},
+
+
+			putContact: async (inputName, inputPhone, inputEmail, inputAddress) => {
+				let actions = getActions();
+				let store = getStore();
+				
+				const response = await fetch('https://playground.4geeks.com/contact/agendas/nestorfrones/contacts/' + `${store.id}`, {
+					method: "PUT",
+					body: JSON.stringify({
+						name: inputName,
+						phone: inputPhone,
+						email: inputEmail,
+						address: inputAddress
+					}),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
+				if (response.ok) {
+					alert("contacto actualizado correctamente")
+					actions.getContacts();
+				}else {
+					alert("no se puede actualizar");
+				}
+			},
 
 			deleteContact: async (id) => {
+				let actions = getActions();
 				const response = await fetch('https://playground.4geeks.com/contact/agendas/nestorfrones/contacts/' + `${id}`, {
 					method: "DELETE",
 				})
 				if (!response.ok) {
 					alert("no se puede eliminar");
+				}else {
+					actions.getContacts();
 				}
 			},
 		}

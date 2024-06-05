@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 
 export const AddContact = () => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
@@ -17,7 +17,7 @@ export const AddContact = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 		actions.postContact(name, phone, email, address)
-		actions.getContacts()
+		//actions.getContacts()
 	}
 
 	return (
