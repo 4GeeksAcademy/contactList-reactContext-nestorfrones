@@ -10,6 +10,7 @@ export const Contact = () => {
 	const { store, actions } = useContext(Context);
 	const [id, setId] = useState("");
 
+
 	function deleteOneContact(element) {
 		setId(element)
 	}
@@ -18,8 +19,8 @@ export const Contact = () => {
 		actions.deleteContact(id);
 	}
 
-	function idUpdateContact(element){
-		actions.setIdForUpdate(element)
+	function idUpdateContact(id, name, address, phone, email) {
+		actions.setIdForUpdate(id, name, address, phone, email)
 	}
 
 
@@ -57,7 +58,7 @@ export const Contact = () => {
 						</div>
 						<div className="col-2 p-2 ms-auto me-2 d-flex d-inline">
 							<div className="d-flex align-items-start mt-3">
-								<Link to="/updateContact"><button onClick={()=> idUpdateContact(contact.id)} className="btn"><FontAwesomeIcon className="px-2" icon={faPencil} /></button></Link>
+								<Link to="/updateContact"><button onClick={() => idUpdateContact(contact.id, contact.name, contact.address, contact.phone, contact.email)} className="btn"><FontAwesomeIcon className="px-2" icon={faPencil} /></button></Link>
 							</div>
 							<div className="d-flex align-items-start mt-3">
 								<button onClick={() => deleteOneContact(contact.id)} className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" ><FontAwesomeIcon className="px-2" icon={faTrash} /></button>

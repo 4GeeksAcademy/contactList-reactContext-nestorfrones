@@ -4,13 +4,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			Contacts: [],
 
 			contact: {
+				id: "",
 				name: "",
 				phone: "",
 				email: "",
 				address: ""
 			},
-
-			id: ""
+			
+			contact2: {
+				id: "",
+				name: "",
+				phone: "",
+				email: "",
+				address: ""
+			},
 
 
 		},
@@ -25,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					const data = await response.json();
 					setStore({
-						Contacts: data.contacts
+						Contacts: data.contacts,
 					})
 				} catch (error) {
 					console.log(error);
@@ -55,9 +62,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			setIdForUpdate: async (newId)=>{
+			setIdForUpdate: async (id, name, address, phone, email)=>{
 				setStore({
-					id: newId
+					contact2: {
+						id: id,
+						name: name,
+						phone: phone,
+						email: email,
+						address: address
+					},
 				})
 			},
 
@@ -66,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let actions = getActions();
 				let store = getStore();
 				
-				const response = await fetch('https://playground.4geeks.com/contact/agendas/nestorfrones/contacts/' + `${store.id}`, {
+				const response = await fetch('https://playground.4geeks.com/contact/agendas/nestorfrones/contacts/' + `${store.contact2.id}`, {
 					method: "PUT",
 					body: JSON.stringify({
 						name: inputName,

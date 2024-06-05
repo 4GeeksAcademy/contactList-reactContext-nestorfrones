@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 
 
 export const UpdateContact = () => {
-    const { actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
+    const [name, setName] = useState(store.contact2.name);
+    const [phone, setPhone] = useState(store.contact2.phone);
+    const [email, setEmail] = useState(store.contact2.email);
+    const [address, setAddress] = useState(store.contact2.address);
 
     function handleSubmit(e) {
         e.preventDefault();

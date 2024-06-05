@@ -17,7 +17,6 @@ export const AddContact = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 		actions.postContact(name, phone, email, address)
-		//actions.getContacts()
 	}
 
 	return (
