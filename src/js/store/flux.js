@@ -20,15 +20,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+
 		},
 		actions: {
+			createContactList: async () => {
+				let actions = getActions();
+					const response = await fetch(
+						"https://playground.4geeks.com/contact/agendas/nestorfrones",{ 
+					method: "POST",
+				});
+				// if (response.ok) {
+				// 	actions.getContacts();
+				// }else{ 
+				// 	actions.getContacts();
+				// }
+			},
+
 			getContacts: async () => {
+				let actions = getActions();
 				try {
 					const response = await fetch(
 						"https://playground.4geeks.com/contact/agendas/nestorfrones"
 					);
 					if (!response.ok) {
-						throw new Error("no se pueden cargar")
+				actions.createContactList();
 					}
 					const data = await response.json();
 					setStore({
