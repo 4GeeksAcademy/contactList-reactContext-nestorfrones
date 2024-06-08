@@ -29,11 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"https://playground.4geeks.com/contact/agendas/nestorfrones",{ 
 					method: "POST",
 				});
-				// if (response.ok) {
-				// 	actions.getContacts();
-				// }else{ 
-				// 	actions.getContacts();
-				// }
+				actions.getContacts();
 			},
 
 			getContacts: async () => {
